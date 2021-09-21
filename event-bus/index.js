@@ -7,10 +7,22 @@ app.use(express.json())
 
 app.post('/events', (req, res) => {
     const event = req.body;
-
-    axios.post('http://localhost:5000/events', event);
-    axios.post('http://localhost:3001/events', event);
-    axios.post('http://localhost:3005/events', event);
+    //Post Service
+    axios.post('http://localhost:5000/events', event).catch((err) => {
+        console.log(err.message);
+      });;
+    //Comment Service
+    axios.post('http://localhost:3001/events', event).catch((err) => {
+        console.log(err.message);
+      });;
+    //Query Service
+    axios.post('http://localhost:3005/events', event).catch((err) => {
+        console.log(err.message);
+      });;
+    //moderation service
+    axios.post('http://localhost:3006/events', event).catch((err) => {
+        console.log(err.message, 'vraiment');
+      });;
 
     res.send({ status: 'OK'});
 })
